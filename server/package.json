@@ -6,7 +6,13 @@
     "scripts": {
         "start": "node index",
         "server": "nodemon index",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "client": "cd ../client && npm run start",
+        "server-install": "npm install",
+        "client-install": "npm client && npm install",
+        "install-all": "concurrently \"npm run server-install\"  \"npm run client-install\" ",
+        "dev": "concurrently \"npm run server\" \"npm run client",
+        "heroku-postbuild": "cd client && npm install && npm run build"
     },
     "author": "",
     "license": "ISC",
@@ -14,6 +20,7 @@
         "bcrypt": "^5.0.1",
         "body-parser": "^1.19.0",
         "cloudinary": "^1.26.2",
+        "concurrently": "^6.2.0",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
         "dateformat": "^4.5.1",

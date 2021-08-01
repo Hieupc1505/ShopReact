@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const createError = require("http-errors");
 const methodOverride = require("method-override");
+const path = require("path");
 // const uploadImage = require("./src/app/Service/cloudinary");
 
 const app = express();
@@ -45,6 +46,13 @@ app.use((err, req, res, next) => {
         })
         .end();
 });
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("../client/build"));
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(_dirname, "/client", "build", "index.html"));
+    });
+}
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
